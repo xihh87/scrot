@@ -395,16 +395,6 @@ scrot_sel_and_grab_image(void)
   }
 
 
-  if ((XGrabKeyboard
-       (disp, root, False, GrabModeAsync, GrabModeAsync,
-        CurrentTime) != GrabSuccess)) {
-    fprintf(stderr, "couldn't grab keyboard:");
-    XFreeCursor(disp, cur_cross);
-    XFreeCursor(disp, cur_angle);
-    XFreeGC(disp, gc);
-    exit(EXIT_FAILURE);
-  }
-
   if (opt.freeze == 1)
       XGrabServer(disp);
 
@@ -460,8 +450,7 @@ scrot_sel_and_grab_image(void)
           done = 1;
           break;
         case KeyPress:
-          fprintf(stderr, "Key was pressed, aborting shot\n");
-          done = 2;
+          /* ignore */
           break;
         case KeyRelease:
           /* ignore */
